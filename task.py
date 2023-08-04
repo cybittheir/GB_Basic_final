@@ -8,30 +8,41 @@ import math
 
 from random import randint
 
-array_len = int(input("Введите размер массива: "))
-max_num = int(input("Введите максимальную длину слова в массиве: "))
+def genArray(array_len, max_num):
+    for i in range(array_len):
+        word = ""
+        for j in range(randint(1, max_num + 1)):
+            select_ascci_range = randint(0,3);
+            match select_ascci_range:
+                case 1:
+                    word += chr(randint(65,90))
+                case 2:
+                    word += chr(randint(97,122))
+                case _:
+                    word += chr(randint(48,57))
+
+        new_array.append(word)
+    return new_array
+
+def select(array,param):
+    if param < 1: param = 3
+    for j in range(len(array)):
+        if len(array[j]) <= param:
+            result.append(array[j])
+    return result
+
+
+array_len = int(input("Введите размер массива(10): ") or 10)
+max_num = int(input("Введите максимальную длину слова в массиве(6): ") or 6)
+max_result_word = int(input("Введите максимальную длину слова в результате(3): ") or 3)
 
 new_array=list()
 result = list()
 
-for i in range(array_len):
-    word = ""
-    for j in range(randint(1, max_num + 1)):
-        select_ascci_range = randint(0,3);
-        match select_ascci_range:
-            case 1:
-                word += chr(randint(65,90))
-            case 2:
-                word += chr(randint(97,122))
-            case _:
-                word += chr(randint(48,57))
+new_array = genArray(array_len, max_num)
 
-    new_array.append(word)
-    
 print ("Полный список для контроля: ", new_array)
 
-for j in range(len(new_array)):
-    if len(new_array[j]) <= 3:
-        result.append(new_array[j])
+result = select(new_array,max_result_word)
 
 print("Выборка/результат: ", result)
